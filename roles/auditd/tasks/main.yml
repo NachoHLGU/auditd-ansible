@@ -1,0 +1,23 @@
+---
+- name: Install auditd
+  apt:
+    name: auditd
+    state: present
+    update_cache: yes
+
+- name: Copy audit rules
+  copy:
+    src: audit.rules
+    dest: /etc/audit/rules.d/audit.rules
+    owner: root
+    group: root
+    mode: '0640'
+
+- name: Enable and start auditd
+  systemd:
+    name: auditd
+    enabled: yes
+    state: started
+
+- name: Reload audit rules
+  command: augenrules --load

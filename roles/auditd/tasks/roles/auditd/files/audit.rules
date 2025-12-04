@@ -1,0 +1,4 @@
+-w /etc/passwd -p wa -k passwd_changes
+-w /etc/shadow -p wa -k shadow_changes
+-w /var/log/auth.log -p rwxa -k auth_logs
+-a always,exit -F arch=b64 -S execve -k process_exec
